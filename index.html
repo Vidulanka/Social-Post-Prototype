@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Social Media Application</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Social Media Application</h1>
+    </header>
+    <main>
+        <section id="post-creation">
+            <h2>Create a New Post</h2>
+            <form id="post-form">
+                <textarea id="post-content" placeholder="What's on your mind?" required></textarea>
+                <button type="submit">Post</button>
+            </form>
+        </section>
+        <section id="post-feed">
+            <h2>Recent Posts</h2>
+            <div id="posts-container"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Social Media Application</p>
+    </footer>
+    <script src="static/scripts.js"></script>
+</body>
+</html>
