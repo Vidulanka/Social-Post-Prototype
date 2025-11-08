@@ -1,16 +1,55 @@
-# React + Vite
+# The Interactor: Social Post Prototype
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌟 **Project Overview**  
+The Interactor is a functional prototype ...
+...
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🌟 **Project Overview**  
+The Interactor is a functional prototype of a core social media application feature: a user interface for creating posts and viewing a dynamic feed. Developed as a mini-project for the **CIT305: Social Media Applications** course, it demonstrates key front-end development principles using React and API integration.
 
-## Expanding the ESLint configuration
+The application utilizes modern React components, manages application state for new user posts, and retrieves initial feed data from a public test API.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ✨ Features
+
+- **Post Creator Form:** A dedicated component allowing users to input text content and an optional image URL for their post.  
+- **Dynamic Feed:** Displays a feed combining posts fetched from the JSONPlaceholder API and newly created posts submitted by the user.  
+- **State Management:** New posts are immediately added to the local application state and appear at the top of the feed in real-time.  
+- **Reusable Components:** Uses a reusable `SocialPost` component to render individual posts consistently across the feed.  
+- **Interactive Post Actions:** Includes functioning Like, Comment (mock functionality), and Share buttons on each post.  
+- **Responsiveness:** Designed with a clean, modern layout that is reasonably responsive on desktop and mobile viewports.
+
+---
+
+## 🛠️ Technical Stack
+
+- Frontend Framework: React  
+- Styling: Pure CSS/JavaScript styles for custom component aesthetics  
+- Language: JavaScript (ES6+)  
+- Data Fetching: Native fetch API to retrieve posts from the JSONPlaceholder API  
+- Development Tools: Vite / Create React App (implied)
+
+---
+
+
+## 👥 Contributors
+
+- M.K Bhagya Prasadini (22UG3-0295)  
+- W.P. Sachini Samudika (22UG3-0287)  
+- E. Pasindu Vidulanka (22UG3-0288)  
+- W.A. Dimosh Threenath (22UG3-0297)  
+- I.V.A. Samaranayake (22UG3-0037)
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+
+---
+
+
