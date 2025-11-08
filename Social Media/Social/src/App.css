@@ -1,42 +1,304 @@
-#root {
-  max-width: 1280px;
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+  width: 100%;
+  max-width: 1100px; /* constrain content so it appears centered in the browser */
+  margin: 18px auto; /* center horizontally using auto margins */
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+/* Ensure no horizontal overflow and full-height root */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* prevents horizontal scroll */
+  overflow-y: auto;   /* allows vertical scroll */
+}
+
+body {
+  background-color: #f1f5f9;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
+  width: 100%;
+}
+
+/* Login page styles */
+.login-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-container input {
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.login-container button {
+  background: #8b5cf6;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-container button:hover {
+  background: #7c3aed;
+}
+
+/* Profile page styles */
+.profile-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
   text-align: center;
+  margin-bottom: 2rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.profile-header h1 {
+  color: #1e293b;
+  margin-bottom: 0.5rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.profile-header p {
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+/* Home page styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.create-post-btn {
+  align-self: flex-end;
+  background: #8b5cf6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-post-btn:hover {
+  background: #7c3aed;
+}
+
+/* Feed and post styles */
+.feed-container {
+  display: block;
+  margin: 20px auto;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.social-post {
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.social-post-header {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.post-image {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.post-actions {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+.action-button {
+  padding: 8px 10px !important;
+}
+
+/* Navbar responsive */
+.navbar {
+  padding: 12px 16px !important;
+}
+.nav-links {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 900px) {
+  .main-content {
+    padding: 1rem !important;
+    max-width: 720px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .navbar-left {
+    gap: 12px !important;
+  }
+
+  .navbar .branding h1 {
+    font-size: 18px !important;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 600px) {
+  .main-content {
+    padding: 0.75rem !important;
+    max-width: 100%;
+  }
+
+  .nav-links {
+    gap: 8px !important;
+  }
+
+  .navbar .branding p {
+    display: none !important;
+  }
+
+  .create-post-btn {
+    padding: 0.6rem 0.8rem !important;
+    font-size: 14px !important;
+  }
+
+  .social-post {
+    padding: 14px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .social-post-header {
+    gap: 10px !important;
+  }
+
+  .social-post .userInfo, .social-post .user-info {
+    display: block !important;
+  }
+
+  .post-actions {
+    justify-content: space-between !important;
   }
 }
 
-.card {
-  padding: 2em;
-}
+/* Small-screen / mobile-specific tweaks */
+@media (max-width: 480px) {
+  .app-container {
+    margin: 8px auto;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
 
-.read-the-docs {
-  color: #888;
+  .navbar {
+    padding: 10px 12px !important;
+  }
+
+  .nav-links {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .navbar .branding h1 {
+    font-size: 16px !important;
+  }
+
+  .create-post-btn {
+    padding: 0.5rem 0.8rem !important;
+    font-size: 13px !important;
+  }
+
+  /* Social post adjustments */
+  .social-post {
+    padding: 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .social-post-header {
+    gap: 10px !important;
+    align-items: flex-start !important;
+  }
+
+  .social-post img[alt] {
+    /* target post avatars */
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .user-info {
+    display: block !important;
+  }
+
+  .user-name {
+    font-size: 15px !important;
+  }
+
+  .post-image {
+    max-height: 260px !important;
+  }
+
+  .post-actions {
+    gap: 12px !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+  }
+
+  .action-button, .post-action-button {
+    padding: 6px 8px !important;
+    font-size: 13px !important;
+  }
+
+  /* Profile page smaller avatar & cover height */
+  .profile-container .cover-photo, .profile-container img {
+    max-height: none;
+  }
+
+  .profile-header h1 {
+    font-size: 20px !important;
+  }
+
+  /* Login and modal responsive fixes */
+  .login-container, .profile-container, .home-container {
+    padding: 12px !important;
+  }
+
+  /* Make textareas and inputs full-width and comfortable */
+  input, textarea {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
 }
