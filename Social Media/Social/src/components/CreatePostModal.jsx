@@ -5,6 +5,14 @@ const CreatePostModal = ({ closeModal, submitPost }) => {
   const [postImageData, setPostImageData] = useState('');
   const [dialogVisible, setDialogVisible] = useState(false);
   const imgInputRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
+  // ✅ Detect screen resize
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 600);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +40,6 @@ const CreatePostModal = ({ closeModal, submitPost }) => {
   };
 
   useEffect(() => {
-    // Small delay for fade-in animation
     const timer = setTimeout(() => setDialogVisible(true), 10);
     return () => clearTimeout(timer);
   }, []);
@@ -50,9 +57,33 @@ const CreatePostModal = ({ closeModal, submitPost }) => {
 
   const modalStyles = {
     ...styles.modal,
+    padding: isMobile ? 16 : 24,
+    width: isMobile ? '95%' : '90%',
+    maxWidth: isMobile ? 380 : 600,
     transform: dialogVisible ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.99)',
     opacity: dialogVisible ? 1 : 0,
     transition: 'all 220ms cubic-bezier(.2,.8,.2,1)',
+  };
+
+  const buttonGroupStyles = {
+    ...styles.buttonGroup,
+    flexDirection: isMobile ? 'column' : 'row',
+    justifyContent: isMobile ? 'center' : 'flex-end',
+    gap: isMobile ? 8 : 12,
+  };
+
+  const cancelButtonStyles = {
+    ...styles.cancelButton,
+    padding: isMobile ? '8px 16px' : '10px 24px',
+    fontSize: isMobile ? 12 : 14,
+    width: isMobile ? '100%' : 'auto',
+  };
+
+  const postButtonStyles = {
+    ...styles.postButton,
+    padding: isMobile ? '8px 16px' : '10px 24px',
+    fontSize: isMobile ? 12 : 14,
+    width: isMobile ? '100%' : 'auto',
   };
 
   return (
@@ -101,7 +132,9 @@ const CreatePostModal = ({ closeModal, submitPost }) => {
               {postImageData ? (
                 <>
                   <img src={postImageData} alt="preview" style={styles.preview} />
-                  <button type="button" style={styles.removeImage} onClick={() => setPostImageData('')}>Remove</button>
+                  <button type="button" style={styles.removeImage} onClick={() => setPostImageData('')}>
+                    Remove
+                  </button>
                 </>
               ) : (
                 <div style={styles.hint}>Tap the camera to add an image</div>
@@ -109,18 +142,11 @@ const CreatePostModal = ({ closeModal, submitPost }) => {
             </div>
           </div>
 
-          <div style={styles.buttonGroup}>
-            <button
-              type="button"
-              style={styles.cancelButton}
-              onClick={closeDialog}
-            >
+          <div style={buttonGroupStyles}>
+            <button type="button" style={cancelButtonStyles} onClick={closeDialog}>
               Cancel
             </button>
-            <button
-              type="submit"
-              style={styles.postButton}
-            >
+            <button type="submit" style={postButtonStyles}>
               Post
             </button>
           </div>
@@ -146,12 +172,9 @@ const styles = {
   modal: {
     background: '#ffffff',
     borderRadius: '16px',
-    padding: 24,
-    width: '90%',
-    maxWidth: 600,
+    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
     maxHeight: '90vh',
     overflow: 'auto',
-    boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)',
   },
   header: {
     display: 'flex',
@@ -211,7 +234,6 @@ const styles = {
     fontWeight: 600,
     cursor: 'pointer',
     color: '#6B6B6B',
-    transition: 'background 0.2s',
   },
   postButton: {
     padding: '10px 24px',
@@ -228,6 +250,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 12,
+    flexWrap: 'wrap',
   },
   cameraButton: {
     padding: '10px 12px',

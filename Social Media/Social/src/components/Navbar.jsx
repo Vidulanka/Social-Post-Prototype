@@ -1,126 +1,192 @@
 import Logo from '../assets/Logo.jpg'
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 const Navbar = ({ onCreatePost }) => {
-    const navigate = useNavigate();
-    return (
-        <header className="navbar" style={styles.nav}>
-            <style>{styles.cssRules}</style>
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
-            <div className="navbar-left" style={styles.left}>
-                <div style={{ ...styles.logo, overflow: 'hidden', background: 'transparent' }}>
-                    <img
-                        src={Logo}
-                        alt="App logo"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                        loading="eager"
-                        decoding="async"
-                    />
-                </div>
-                <div style={styles.branding}>
-                    <h1 style={styles.title}>Social Post Prototype</h1>
-                    <p style={styles.subtitle}>Empowering conversations everywhere</p>
-                </div>
-            </div>
+  return (
+    <header className="navbar" style={styles.nav}>
+      <style>{styles.cssRules}</style>
 
-            <div className="nav-links" style={styles.navLinks}>
-                <Link to="/" className="nav-link" style={styles.navLink}>Home</Link>
-                <Link to="/profile" className="nav-link" style={styles.navLink}>Profile</Link>
-                <Link to="/login" className="nav-link" style={styles.navLink}>Login</Link>
-                <button
-                    type="button"
-                    className="createPostBtn"
-                    style={styles.button}
-                    onClick={() => onCreatePost()}
-                    aria-label="Create a new post"
-                >
-                    Create Post
-                </button>
-            </div>
-        </header>
-    )
-}
+      <div className="navbar-left" style={styles.left}>
+        <div style={{ ...styles.logo, overflow: 'hidden' }}>
+          <img
+            src={Logo}
+            alt="App logo"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <div style={styles.branding}>
+          <h1 style={styles.title}>Social Post Prototype</h1>
+          <p style={styles.subtitle}>Empowering conversations everywhere</p>
+        </div>
+      </div>
+
+      {/* ✅ Hamburger Menu for Mobile */}
+      <button
+        className="menu-toggle"
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle navigation"
+        style={styles.hamburgerButton}
+      >
+        ☰
+      </button>
+
+      {/* ✅ Navigation Links */}
+      <div
+        className="nav-links"
+        style={{
+          ...styles.navLinks,
+          ...(menuOpen ? styles.navLinksOpen : styles.navLinksClosed),
+        }}
+      >
+        <Link to="/" className="nav-link" style={styles.navLink} onClick={() => setMenuOpen(false)}>
+          Home
+        </Link>
+        <Link to="/profile" className="nav-link" style={styles.navLink} onClick={() => setMenuOpen(false)}>
+          Profile
+        </Link>
+        <Link to="/login" className="nav-link" style={styles.navLink} onClick={() => setMenuOpen(false)}>
+          Login
+        </Link>
+        <button
+          type="button"
+          className="createPostBtn"
+          style={styles.button}
+          onClick={() => {
+            onCreatePost();
+            setMenuOpen(false);
+          }}
+        >
+          Create Post
+        </button>
+      </div>
+    </header>
+  );
+};
 
 const styles = {
-    nav: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '16px 32px',
-        backgroundColor: '#1e293b', // dark slate blue background
-        position: 'sticky',
-        top: 0,
-        zIndex: 20,
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
-    },
-    left: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: 16,
-    },
-    logo: {
-        width: 56,
-        height: 56,
-        borderRadius: 14,
-        boxShadow: '0 4px 10px rgba(139, 92, 246, 0.6)', // subtle purple glow
-    },
-    branding: {
-        display: 'flex',
-        flexDirection: 'column',
-        color: '#f1f5f9', // light gray text
-        userSelect: 'none',
-    },
-    title: {
-        margin: 0,
-        fontSize: '22px',
-        fontWeight: '700',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    },
-    subtitle: {
-        margin: 0,
-        fontSize: '12px',
-        opacity: 0.7,
-        fontWeight: '400',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-    },
-    button: {
-        background: 'linear-gradient(135deg, #8b5cf6, #ec4899, #fbbf24)', // purple-pink-yellow gradient
-        color: '#fff',
-        border: 'none',
-        borderRadius: 12,
-        padding: '14px 28px',
-        fontWeight: 600,
-        cursor: 'pointer',
-        fontSize: '15px',
-        transition: 'all 0.3s ease',
-        boxShadow: '0 6px 20px rgba(251, 191, 36, 0.5)',
-        userSelect: 'none',
-    },
-    navLinks: {
-        display: 'flex',
-        alignItems: 'center',
-        gap: '20px',
-    },
-    navLink: {
-        color: '#f1f5f9',
-        textDecoration: 'none',
-        fontSize: '16px',
-        fontWeight: '500',
-        transition: 'color 0.3s ease',
-        ':hover': {
-            color: '#8b5cf6',
-        }
-    },
-    cssRules: `
-        .createPostBtn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(251, 191, 36, 0.7);
-        }
-        .createPostBtn:active {
-            transform: translateY(0);
-            box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
-        }
-    `,
-}
+  nav: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '12px 20px',
+    backgroundColor: '#1e293b',
+    position: 'sticky',
+    top: 0,
+    zIndex: 50,
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
+    flexWrap: 'wrap',
+  },
+  left: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    borderRadius: 12,
+    boxShadow: '0 4px 10px rgba(139, 92, 246, 0.6)',
+  },
+  branding: {
+    display: 'flex',
+    flexDirection: 'column',
+    color: '#f1f5f9',
+    userSelect: 'none',
+  },
+  title: {
+    margin: 0,
+    fontSize: 18,
+    fontWeight: 700,
+  },
+  subtitle: {
+    margin: 0,
+    fontSize: 11,
+    opacity: 0.7,
+  },
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 16,
+    transition: 'all 0.3s ease',
+  },
+  navLinksOpen: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    marginTop: 10,
+    backgroundColor: '#0f172a',
+    padding: '12px 0',
+    borderRadius: 10,
+  },
+  navLinksClosed: {
+    display: 'none',
+  },
+  navLink: {
+    color: '#f1f5f9',
+    textDecoration: 'none',
+    fontSize: 15,
+    fontWeight: 500,
+  },
+  button: {
+    background: 'linear-gradient(135deg, #8b5cf6, #ec4899, #fbbf24)',
+    color: '#fff',
+    border: 'none',
+    borderRadius: 10,
+    padding: '10px 22px',
+    fontWeight: 600,
+    cursor: 'pointer',
+    fontSize: 14,
+    transition: 'all 0.3s ease',
+    boxShadow: '0 6px 20px rgba(251, 191, 36, 0.5)',
+  },
+  hamburgerButton: {
+    display: 'none',
+    fontSize: 26,
+    background: 'none',
+    border: 'none',
+    color: '#f1f5f9',
+    cursor: 'pointer',
+  },
+  cssRules: `
+      /* Hover animation for button */
+      .createPostBtn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(251, 191, 36, 0.7);
+      }
 
-export default Navbar
+      /* Active state */
+      .createPostBtn:active {
+        transform: translateY(0);
+        box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
+      }
+
+      /* ✅ Mobile Styles */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block !important;
+        }
+
+        .nav-links {
+          flex-direction: column !important;
+          align-items: center !important;
+          width: 100%;
+          margin-top: 12px;
+          padding-bottom: 8px;
+        }
+
+        .nav-link, .createPostBtn {
+          width: 90%;
+          text-align: center;
+          font-size: 16px;
+        }
+      }
+  `,
+};
+
+export default Navbar;
