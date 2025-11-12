@@ -38,11 +38,8 @@ const Navbar = ({ onCreatePost }) => {
 
       {/* ✅ Navigation Links */}
       <div
-        className="nav-links"
-        style={{
-          ...styles.navLinks,
-          ...(menuOpen ? styles.navLinksOpen : styles.navLinksClosed),
-        }}
+        className={`nav-links ${menuOpen ? 'open' : ''}`}
+        style={styles.navLinks}
       >
         <Link to="/" className="nav-link" style={styles.navLink} onClick={() => setMenuOpen(false)}>
           Home
@@ -113,19 +110,6 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 16,
-    transition: 'all 0.3s ease',
-  },
-  navLinksOpen: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    marginTop: 10,
-    backgroundColor: '#0f172a',
-    padding: '12px 0',
-    borderRadius: 10,
-  },
-  navLinksClosed: {
-    display: 'none',
   },
   navLink: {
     color: '#f1f5f9',
@@ -154,6 +138,12 @@ const styles = {
     cursor: 'pointer',
   },
   cssRules: `
+      /* Hover animation for nav links */
+      .nav-link:hover {
+        color: #fbbf24;
+        transition: color 0.2s ease;
+      }
+
       /* Hover animation for button */
       .createPostBtn:hover {
         transform: translateY(-4px);
@@ -173,17 +163,25 @@ const styles = {
         }
 
         .nav-links {
-          flex-direction: column !important;
-          align-items: center !important;
+          display: none !important;
+          flex-direction: column;
+          align-items: center;
           width: 100%;
           margin-top: 12px;
-          padding-bottom: 8px;
+          padding: 12px 0;
+          background-color: #0f172a;
+          border-radius: 10px;
+        }
+
+        .nav-links.open {
+          display: flex !important;
         }
 
         .nav-link, .createPostBtn {
           width: 90%;
           text-align: center;
           font-size: 16px;
+          padding: 10px;
         }
       }
   `,
